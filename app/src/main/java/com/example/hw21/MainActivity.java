@@ -62,12 +62,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void validateUser(String name, String pass){
-        if(name.equals("Admin")){
-            if(pass.equals("123")){
-                Intent intent = new Intent(MainActivity.this, HomePage.class);
-                startActivity(intent);
-            }
-        }
 
         for(int i = 0; i < usersNames.size();i++){
             if(name.equals(usersNames.get(i))){
@@ -79,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+        invalidMessage.setText("Wrong username or password");
     }
     private void getUsers(){
         Call<List<Users>> call = jsonPlaceHolderApi.getUsers();

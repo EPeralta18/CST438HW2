@@ -2,6 +2,7 @@ package com.example.hw21;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -17,12 +18,19 @@ public class HomePage extends AppCompatActivity {
 
     private TextView textViewResult;
     private JsonPlaceHolderApi jsonPlaceHolderApi;
+    private int ID;
+//    private Intent intent = getIntent();
+//    private String userID = intent.getStringExtra("userID");
+//    private String name = intent.getStringExtra("name");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        ID = Integer.parseInt((String) extras.get("userID"));
         textViewResult = findViewById(R.id.text_view_result);
 
         Retrofit retrofit  = new Retrofit.Builder()
@@ -32,6 +40,8 @@ public class HomePage extends AppCompatActivity {
 
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
 
+        textViewResult.append("Welcome " + (String) extras.get("name") + "\n");
+        textViewResult.append("Your ID: " + (String) extras.get("userID") + "\n\n");
         getPosts();
     }
 
@@ -48,11 +58,11 @@ public class HomePage extends AppCompatActivity {
 
                 List<Post> posts = response.body();
                 for(Post post : posts){
-                    String content = "";
-                    content += "ID: " + post.getId() + "\n";
-                    content += "Text: " + post.getText() + "\n\n";
-
-                    textViewResult.append(content);
+                    if(post.getUserId() == ID){
+                        String content = "";
+                        content += "Post #" + post.getId() + " " + post.getText() + "\n\n";
+                        textViewResult.append(content);
+                    }
                 }
             }
 
