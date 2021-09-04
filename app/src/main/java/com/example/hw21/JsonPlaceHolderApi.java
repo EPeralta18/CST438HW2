@@ -11,5 +11,5 @@ public interface JsonPlaceHolderApi {
     Call<List<Post>> getPosts();
 
     @GET("users")
-    Call<List<Post>> getUsers();
+    Call<List<Users>> getUsers();
 }

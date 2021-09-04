@@ -48,7 +48,7 @@
         android:id="@+id/invalidMess"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Username:Admin Pass:123"
+        android:text="UserName: 1 Pass:login1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
